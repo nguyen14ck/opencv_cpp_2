@@ -7,18 +7,28 @@ from utils import *
 
 def prediction(net):   
     # Draw or clear?
-    drawing_mode = st.checkbox("Draw or clear?",True)
+    # drawing_mode = st.checkbox("Draw or clear?",True)
 
     # Create a canvas component
-    image_data = st_canvas(
-        15, '#FFF', '#000', height=280,width=280, drawing_mode=drawing_mode, key="canvas"
-    )
+    # image_data = st_canvas(
+    #     15, '#FFF', '#000', height=280,width=280, drawing_mode=drawing_mode, key="canvas"
+    # )
+
+    canvas_result = st_canvas(
+        stroke_width = 15,
+        stroke_color = "#fff",
+        background_color = "#000",
+        height = 280,
+        width = 280,
+        drawing_mode = "freedraw",
+        key = "canvas",
+        )
 
     # Predicting the image
-    if image_data is not None:
+    if canvas_result is not None:
         if st.button('Predict'):
             # Model inference
-            digit, confidence = predictDigit(image_data,net)
+            digit, confidence = predictDigit(canvas_result.image_data, net)
             st.write('Recognized Digit: {}'.format(digit))
             st.write('Confidence: {:.2f}'.format(confidence))
 
@@ -30,10 +40,13 @@ def main():
     st.write("\n\n")
     st.write("Draw a digit below and click on Predict button")
     st.write("\n")
-    st.write("To clear the digit, uncheck checkbox, double click on the digit or refresh the page")
-    st.write("To draw the digit, check the checkbox")
+    # st.write("To clear the digit, uncheck checkbox, double click on the digit or refresh the page")
+    # st.write("To draw the digit, check the checkbox")
+    st.write("To clear the digit, click on the trash bin icon (below the drawing canvas)")
+    # st.write("To draw the digit, check the checkbox")
 
     prediction(net)
 
 if __name__ == '__main__':
     main()
+
