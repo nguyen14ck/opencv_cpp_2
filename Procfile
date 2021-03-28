@@ -1,1 +1,1 @@
-web:gunicorn cv_web_app:app
+web: sh setup.sh && streamlit run cv_web_app.py
