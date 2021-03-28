@@ -1,0 +1,6 @@
+strealit
+streamlit-drawable-canvas
+gunicorn
+numpy
+opencv-python-headless==4.2.0.32
+pybase64
